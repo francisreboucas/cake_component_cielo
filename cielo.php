@@ -5,7 +5,7 @@
  * @link www.implementado.com
  * @author      Luan Garcia <luan.garcia@gmail.com>
  * @version     1.0
- * @modified 	Francis Rebouças <francisreboucas@gmail.com>
+ * @modified 	Francis RebouÃ§as <francisreboucas@gmail.com>
  * @license	http://www.opensource.org/licenses/mit-license.php The MIT License
  * @package	app
  * @subpackage app.controller.components
@@ -15,18 +15,18 @@
 class CieloComponent extends Object {
 
 	 /**
-    * Ambiente: Teste ou Produção
+    * Ambiente: Teste ou ProduÃ§Ã£o
     * @var boolean 
     */
     public $teste       = false;    												
     	/**
-    * ID de afiliação junto a cielo. Ex.:1001734898
+    * ID de afiliaÃ§Ã£o junto a cielo. Ex.:1001734898
     * @var string
     */  
     public $afiliacao      = '1001734898';    
 	
 	/**
-    * Chave de Produção. Ex.:e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832
+    * Chave de ProduÃ§Ã£o. Ex.:e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832
     * @var string
     */  
     public $chave      = 'e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832';   
@@ -43,13 +43,13 @@ class CieloComponent extends Object {
     public $bandeira    = 'visa';     
 	
 	/**
-    * Parcelas liberadas junto a afilicação da Cielo
+    * Parcelas liberadas junto a afilicaÃ§Ã£o da Cielo
     * @var int
     */	
     public $parcelas    = 1;   
 	
 	/**
-    * Valor do Pedido no padrão sem virgula. Ex.: 1000 será R$10.00
+    * Valor do Pedido no padrÃ£o sem virgula. Ex.: 1000 serÃ¡ R$10.00
     * @var int
     */	  																
     public $valor       = 1;   
@@ -61,8 +61,8 @@ class CieloComponent extends Object {
     public $capturar    = 'false';  
 	
 	/**
-    * Indicador de autorização automática: 0 (não autorizar) 1 (autorizar somente se autenticada) 2 (autorizar autenticada e não-autenticada) 
-	* 3 (autorizar sem passar por autenticação - válido somente para crédito)
+    * Indicador de autorizaÃ§Ã£o automÃ¡tica: 0 (nÃ£o autorizar) 1 (autorizar somente se autenticada) 2 (autorizar autenticada e nÃ£o-autenticada) 
+	* 3 (autorizar sem passar por autenticaÃ§Ã£o - vÃ¡lido somente para crÃ©dito)
     * @var int
     */ 															
     public $autorizar   = 2; 
@@ -79,7 +79,7 @@ class CieloComponent extends Object {
     */ 		
     public $url         = 'https://ecommerce.cbmp.com.br/servicos/ecommwsec.do';				
 	/**
-    * URL para retorno apos informar os dados do cartão na no by page cielo
+    * URL para retorno apos informar os dados do cartÃ£o na no by page cielo
     * @var string
     */ 
     public $url_retorno = '';   
@@ -109,7 +109,7 @@ class CieloComponent extends Object {
     function enviarPedido() {
 
         /**
-         * Se as parcelas forem > 1 produto=Crédito à Vista senão produto=Parcelado loja
+         * Se as parcelas forem > 1 produto=CrÃ©dito Ã  Vista senÃ£o produto=Parcelado loja
          */
         $produto = $this->parcelas > 1 ? 2 : 1;
         /**
@@ -149,7 +149,7 @@ class CieloComponent extends Object {
         
         $retorno = Set::reverse(new Xml($this->file_post_contents($post)));
          
-        #Log para debug futuro em produção, facilita o debug no cliente
+        #Log para debug futuro em produÃ§Ã£o, facilita o debug no cliente
         
         if(isset($retorno['Erro'])) {
             $log =  var_export($retorno, true);
@@ -164,7 +164,7 @@ class CieloComponent extends Object {
    
     /**
      * Metodo realiza a consulta do pedido na visa
-     * @param String TID da Transação
+     * @param String TID da TransaÃ§Ã£o
      * @return mixed
      */
     function consultarPedido($tid) {
@@ -184,8 +184,8 @@ class CieloComponent extends Object {
 	
 	 /**
      * Metodo realiza a captura do pedido na visa
-     * @param String TID da Transação
-     * @param int Valor da Transação
+     * @param String TID da TransaÃ§Ã£o
+     * @param int Valor da TransaÃ§Ã£o
      * @param String Anexo
      * @return mixed
      */
@@ -228,8 +228,8 @@ class CieloComponent extends Object {
         return $retorno_visa;
 	}
 	/**
-	 * Metodo realiza a solicitação de cancelamento do pedido
-	 * @param String TID da Transação
+	 * Metodo realiza a solicitaÃ§Ã£o de cancelamento do pedido
+	 * @param String TID da TransaÃ§Ã£o
 	 * @return mixed
 	 */
 	public function solicitarCancelamento($tid){
@@ -287,19 +287,19 @@ class CieloComponent extends Object {
 					break;
 			case "2": $status = "Autenticada";
 					break;
-			case "3": $status = "Não autenticada";
+			case "3": $status = "NÃ£o autenticada";
 					break;
 			case "4": $status = "Autorizada";
 					break;
-			case "5": $status = "Não autorizada";
+			case "5": $status = "NÃ£o autorizada";
 					break;
 			case "6": $status = "Capturada";
 					break;
-			case "8": $status = "Não capturada";
+			case "8": $status = "NÃ£o capturada";
 					break;
 			case "9": $status = "Cancelada";
 					break;
-			case "10": $status = "Em autenticação";
+			case "10": $status = "Em autenticaÃ§Ã£o";
 					break;
 			default: $status = "n/a";
 					break;
